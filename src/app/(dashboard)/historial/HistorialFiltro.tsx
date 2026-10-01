@@ -29,14 +29,14 @@ export default function HistorialFiltro({
 
   return (
     <div className="flex flex-wrap items-end gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-      <div>
+      <div className="w-full sm:w-auto">
         <label className="mb-1 block text-xs font-medium text-gray-600">
           Pasante
         </label>
         <select
           value={form.pasanteId}
           onChange={(e) => setForm({ ...form, pasanteId: e.target.value })}
-          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:w-auto"
         >
           <option value="">Seleccionar...</option>
           {pasantes.map((p) => (
@@ -46,7 +46,7 @@ export default function HistorialFiltro({
           ))}
         </select>
       </div>
-      <div>
+      <div className="w-full sm:w-auto">
         <label className="mb-1 block text-xs font-medium text-gray-600">
           Desde
         </label>
@@ -54,10 +54,10 @@ export default function HistorialFiltro({
           type="date"
           value={form.desde}
           onChange={(e) => setForm({ ...form, desde: e.target.value })}
-          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:w-auto"
         />
       </div>
-      <div>
+      <div className="w-full sm:w-auto">
         <label className="mb-1 block text-xs font-medium text-gray-600">
           Hasta
         </label>
@@ -65,12 +65,12 @@ export default function HistorialFiltro({
           type="date"
           value={form.hasta}
           onChange={(e) => setForm({ ...form, hasta: e.target.value })}
-          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:w-auto"
         />
       </div>
       <button
         onClick={aplicar}
-        className="rounded-md bg-gradient-to-br from-blue-500 to-blue-700 px-4 py-1.5 text-sm font-medium text-white shadow-sm transition-transform hover:brightness-110 active:scale-[0.98]"
+        className="w-full rounded-md bg-gradient-to-br from-blue-500 to-blue-700 px-4 py-1.5 text-sm font-medium text-white shadow-sm transition-transform hover:brightness-110 active:scale-[0.98] sm:w-auto"
       >
         Filtrar
       </button>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { Pasante } from "@/lib/types";
 import { crearPasante, actualizarPasante } from "./actions";
+import { toast } from "@/lib/toast";
 
 export default function PasanteForm({
   pasante,
@@ -12,27 +13,29 @@ export default function PasanteForm({
   onDone?: () => void;
 }) {
   const [guardando, setGuardando] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(formData: FormData) {
     setGuardando(true);
-    setError(null);
     try {
       if (pasante) {
         await actualizarPasante(pasante.id, formData);
+        toast.success("Cambios guardados correctamente");
       } else {
         await crearPasante(formData);
+        toast.success("Registro creado correctamente");
       }
       onDone?.();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Error al guardar");
+      toast.error(
+        e instanceof Error ? e.message : "No se pudo guardar el registro"
+      );
     } finally {
       setGuardando(false);
     }
   }
 
   return (
-    <form action={handleSubmit} className="grid grid-cols-2 gap-3">
+    <form action={handleSubmit} className="grid grid-cols-1 gap-3 sm:grid-cols-2">
       <div>
         <label className="mb-1 block text-sm font-medium text-gray-700">
           Nombre
@@ -99,9 +102,7 @@ export default function PasanteForm({
         />
       </div>
 
-      {error && <p className="col-span-2 text-sm text-red-600">{error}</p>}
-
-      <div className="col-span-2 flex justify-end gap-2 pt-1">
+      <div className="flex justify-end gap-2 pt-1 sm:col-span-2">
         {onDone && (
           <button
             type="button"

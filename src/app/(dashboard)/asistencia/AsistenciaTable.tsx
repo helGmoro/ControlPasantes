@@ -5,6 +5,7 @@ import { useState } from "react";
 import type { Asistencia, EstadoAsistencia, Pasante } from "@/lib/types";
 import { calcularHoras, ESTADOS } from "@/lib/asistencia";
 import { guardarAsistencia } from "./actions";
+import { toast } from "@/lib/toast";
 
 interface Fila {
   pasante: Pasante;
@@ -70,14 +71,16 @@ export default function AsistenciaTable({
         observaciones: fila.observaciones || null,
       });
       actualizarFila(index, { guardando: false, guardado: true });
+      toast.success("Asistencia guardada correctamente");
     } catch {
       actualizarFila(index, { guardando: false });
+      toast.error("No se pudo guardar la asistencia. Intentá nuevamente.");
     }
   }
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-xl font-bold tracking-tight text-gray-900">
           Asistencia diaria
         </h1>
@@ -90,6 +93,7 @@ export default function AsistenciaTable({
       </div>
 
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+        <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-gray-50 text-left text-xs font-medium uppercase tracking-wide text-gray-500">
             <tr>
@@ -199,6 +203,7 @@ export default function AsistenciaTable({
             )}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   );

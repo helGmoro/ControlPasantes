@@ -4,17 +4,16 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { usernameToEmail } from "@/lib/auth";
+import { toast } from "@/lib/toast";
 
 export default function LoginPage() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const [cargando, setCargando] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setError(null);
     setCargando(true);
 
     const supabase = createClient();
@@ -26,10 +25,11 @@ export default function LoginPage() {
     setCargando(false);
 
     if (error) {
-      setError("Usuario o contraseña incorrectos.");
+      toast.error("Correo o contraseña incorrectos");
       return;
     }
 
+    toast.success("Inicio de sesión exitoso");
     router.push("/asistencia");
     router.refresh();
   }
@@ -78,8 +78,6 @@ export default function LoginPage() {
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
-
-        {error && <p className="text-sm text-red-600">{error}</p>}
 
         <button
           type="submit"

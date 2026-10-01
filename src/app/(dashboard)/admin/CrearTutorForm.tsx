@@ -1,29 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { crearTutor } from "./actions";
+import { toast } from "@/lib/toast";
 
 export default function CrearTutorForm() {
   const [guardando, setGuardando] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [ok, setOk] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   async function handleSubmit(formData: FormData) {
     setGuardando(true);
-    setError(null);
-    setOk(false);
     try {
       await crearTutor(formData);
-      setOk(true);
+      toast.success("Cuenta creada correctamente");
+      formRef.current?.reset();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Error al crear la cuenta");
+      toast.error(
+        e instanceof Error ? e.message : "No se pudo crear la cuenta"
+      );
     } finally {
       setGuardando(false);
     }
   }
 
   return (
-    <form action={handleSubmit} className="grid grid-cols-2 gap-3">
+    <form
+      ref={formRef}
+      action={handleSubmit}
+      className="grid grid-cols-1 gap-3 sm:grid-cols-2"
+    >
       <div>
         <label className="mb-1 block text-sm font-medium text-gray-700">
           Usuario
@@ -68,14 +73,7 @@ export default function CrearTutorForm() {
         </select>
       </div>
 
-      {error && <p className="col-span-2 text-sm text-red-600">{error}</p>}
-      {ok && (
-        <p className="col-span-2 text-sm text-green-600">
-          Cuenta creada correctamente.
-        </p>
-      )}
-
-      <div className="col-span-2 flex justify-end">
+      <div className="flex justify-end sm:col-span-2">
         <button
           type="submit"
           disabled={guardando}

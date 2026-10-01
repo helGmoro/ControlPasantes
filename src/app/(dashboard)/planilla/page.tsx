@@ -65,7 +65,7 @@ export default async function PlanillaPage({
 
       {pasanteSeleccionado && (
         <div className="planilla rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-          <div className="mb-4 flex items-start justify-between">
+          <div className="mb-4 flex flex-wrap items-start justify-between gap-2">
             <div>
               <h2 className="text-base font-semibold text-gray-900">
                 Planilla de asistencia
@@ -80,6 +80,7 @@ export default async function PlanillaPage({
             </p>
           </div>
 
+          <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-300 text-left text-xs uppercase text-gray-500">
@@ -116,12 +117,13 @@ export default async function PlanillaPage({
               </tr>
             </tfoot>
           </table>
+          </div>
 
-          <div className="mt-10 flex justify-between text-sm text-gray-600">
-            <div className="border-t border-gray-400 pt-1 pr-16">
+          <div className="mt-10 flex flex-col gap-6 text-sm text-gray-600 sm:flex-row sm:justify-between">
+            <div className="border-t border-gray-400 pt-1 sm:pr-16">
               Firma del tutor
             </div>
-            <div className="border-t border-gray-400 pt-1 pl-16">
+            <div className="border-t border-gray-400 pt-1 sm:pl-16">
               Firma del pasante
             </div>
           </div>

@@ -4,6 +4,7 @@ import { Fragment, useState } from "react";
 import type { Pasante } from "@/lib/types";
 import { cambiarActivo } from "./actions";
 import PasanteForm from "./PasanteForm";
+import { toast } from "@/lib/toast";
 
 export default function PasantesTable({
   pasantes,
@@ -12,6 +13,15 @@ export default function PasantesTable({
 }) {
   const [mostrarNuevo, setMostrarNuevo] = useState(false);
   const [editandoId, setEditandoId] = useState<string | null>(null);
+
+  async function handleCambiarActivo(id: string, activo: boolean) {
+    try {
+      await cambiarActivo(id, activo);
+      toast.success(activo ? "Pasante activado" : "Pasante desactivado");
+    } catch {
+      toast.error("No se pudo actualizar el pasante. Intentá nuevamente.");
+    }
+  }
 
   return (
     <div className="space-y-4">
@@ -36,6 +46,7 @@ export default function PasantesTable({
       )}
 
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+        <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-gray-50 text-left text-xs font-medium uppercase tracking-wide text-gray-500">
             <tr>
@@ -81,7 +92,7 @@ export default function PasantesTable({
                       Editar
                     </button>
                     <button
-                      onClick={() => cambiarActivo(p.id, !p.activo)}
+                      onClick={() => handleCambiarActivo(p.id, !p.activo)}
                       className={
                         p.activo
                           ? "text-red-600 transition-colors hover:text-red-700"
@@ -113,6 +124,7 @@ export default function PasantesTable({
             )}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   );
