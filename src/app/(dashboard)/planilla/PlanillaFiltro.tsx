@@ -36,7 +36,7 @@ export default function PlanillaFiltro({
   const anios = [anioActual - 1, anioActual, anioActual + 1];
 
   return (
-    <div className="no-print flex flex-wrap items-end gap-3 rounded-lg border border-gray-200 bg-white p-4">
+    <div className="no-print flex flex-wrap items-end gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
       <div>
         <label className="mb-1 block text-xs font-medium text-gray-600">
           Pasante
@@ -44,7 +44,7 @@ export default function PlanillaFiltro({
         <select
           value={form.pasanteId}
           onChange={(e) => setForm({ ...form, pasanteId: e.target.value })}
-          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         >
           <option value="">Seleccionar...</option>
           {pasantes.map((p) => (
@@ -61,7 +61,7 @@ export default function PlanillaFiltro({
         <select
           value={form.mes}
           onChange={(e) => setForm({ ...form, mes: Number(e.target.value) })}
-          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         >
           {MESES.map((m, i) => (
             <option key={m} value={i + 1}>
@@ -77,7 +77,7 @@ export default function PlanillaFiltro({
         <select
           value={form.anio}
           onChange={(e) => setForm({ ...form, anio: Number(e.target.value) })}
-          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         >
           {anios.map((a) => (
             <option key={a} value={a}>
@@ -88,14 +88,14 @@ export default function PlanillaFiltro({
       </div>
       <button
         onClick={aplicar}
-        className="rounded-md bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-700"
+        className="rounded-md bg-gradient-to-br from-blue-500 to-blue-700 px-4 py-1.5 text-sm font-medium text-white shadow-sm transition-transform hover:brightness-110 active:scale-[0.98]"
       >
         Generar
       </button>
       {pasanteId && (
         <button
           onClick={() => window.print()}
-          className="rounded-md border border-gray-300 px-4 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          className="rounded-md border border-gray-300 px-4 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
         >
           Imprimir
         </button>

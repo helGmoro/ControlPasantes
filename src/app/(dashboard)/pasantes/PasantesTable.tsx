@@ -16,11 +16,13 @@ export default function PasantesTable({
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold text-gray-900">Pasantes</h1>
+        <h1 className="text-xl font-bold tracking-tight text-gray-900">
+          Pasantes
+        </h1>
         {!mostrarNuevo && (
           <button
             onClick={() => setMostrarNuevo(true)}
-            className="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700"
+            className="rounded-md bg-gradient-to-br from-blue-500 to-blue-700 px-3 py-1.5 text-sm font-medium text-white shadow-sm transition-transform hover:brightness-110 active:scale-[0.98]"
           >
             + Nuevo pasante
           </button>
@@ -28,14 +30,14 @@ export default function PasantesTable({
       </div>
 
       {mostrarNuevo && (
-        <div className="rounded-lg border border-gray-200 bg-white p-4">
+        <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
           <PasanteForm onDone={() => setMostrarNuevo(false)} />
         </div>
       )}
 
-      <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
+      <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
         <table className="w-full text-sm">
-          <thead className="bg-gray-50 text-left text-xs font-medium uppercase text-gray-500">
+          <thead className="bg-gray-50 text-left text-xs font-medium uppercase tracking-wide text-gray-500">
             <tr>
               <th className="px-4 py-2">Nombre</th>
               <th className="px-4 py-2">Área</th>
@@ -48,8 +50,8 @@ export default function PasantesTable({
           <tbody>
             {pasantes.map((p) => (
               <Fragment key={p.id}>
-                <tr className="border-t border-gray-100">
-                  <td className="px-4 py-2">
+                <tr className="border-t border-gray-100 transition-colors hover:bg-blue-50/40">
+                  <td className="px-4 py-2 font-medium text-gray-900">
                     {p.apellido}, {p.nombre}
                     {p.legajo && (
                       <span className="ml-1 text-gray-500">({p.legajo})</span>
@@ -74,7 +76,7 @@ export default function PasantesTable({
                       onClick={() =>
                         setEditandoId(editandoId === p.id ? null : p.id)
                       }
-                      className="text-gray-500 hover:text-gray-900"
+                      className="text-gray-500 transition-colors hover:text-gray-900"
                     >
                       Editar
                     </button>
@@ -82,8 +84,8 @@ export default function PasantesTable({
                       onClick={() => cambiarActivo(p.id, !p.activo)}
                       className={
                         p.activo
-                          ? "text-red-600 hover:text-red-700"
-                          : "text-blue-600 hover:text-blue-700"
+                          ? "text-red-600 transition-colors hover:text-red-700"
+                          : "text-blue-600 transition-colors hover:text-blue-700"
                       }
                     >
                       {p.activo ? "Desactivar" : "Activar"}

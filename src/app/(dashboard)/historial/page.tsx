@@ -42,7 +42,9 @@ export default async function HistorialPage({
 
   return (
     <div className="space-y-4">
-      <h1 className="text-lg font-semibold text-gray-900">Historial</h1>
+      <h1 className="text-xl font-bold tracking-tight text-gray-900">
+        Historial
+      </h1>
 
       <HistorialFiltro
         pasantes={(pasantes ?? []) as Pasante[]}
@@ -53,13 +55,16 @@ export default async function HistorialPage({
 
       {pasanteId && (
         <>
-          <div className="rounded-lg border border-gray-200 bg-white p-4 text-sm text-gray-700">
-            Total del período: <span className="font-semibold">{totalHoras} hs</span>
+          <div className="rounded-xl border border-blue-100 bg-blue-50 p-4 text-sm text-gray-700 shadow-sm">
+            Total del período:{" "}
+            <span className="font-semibold text-blue-700">
+              {totalHoras} hs
+            </span>
           </div>
 
-          <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
+          <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 text-left text-xs font-medium uppercase text-gray-500">
+              <thead className="bg-gray-50 text-left text-xs font-medium uppercase tracking-wide text-gray-500">
                 <tr>
                   <th className="px-4 py-2">Fecha</th>
                   <th className="px-4 py-2">Estado</th>
@@ -71,8 +76,13 @@ export default async function HistorialPage({
               </thead>
               <tbody>
                 {dias.map((d) => (
-                  <tr key={d.id} className="border-t border-gray-100">
-                    <td className="px-4 py-2">{d.fecha}</td>
+                  <tr
+                    key={d.id}
+                    className="border-t border-gray-100 transition-colors hover:bg-blue-50/40"
+                  >
+                    <td className="px-4 py-2 font-medium text-gray-900">
+                      {d.fecha}
+                    </td>
                     <td className="px-4 py-2">
                       {etiquetaEstado(d.estado)}
                       {d.esVirtual && (
