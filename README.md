@@ -52,4 +52,6 @@ src/
 │  ├─ asistencia.ts       -- cálculo de horas y días con default "ausente"
 │  └─ types.ts
 ├─ proxy.ts                -- protección de rutas (antes "middleware.ts" en Next 16)
-
+ 
+-
+```
