@@ -25,9 +25,9 @@ export default async function AsistenciaPage({
 
   if (errorPasantes || errorRegistros) {
     return (
-      <p className="text-red-600">
+      <div className="rounded-lg border border-gray-200 bg-white p-4 text-red-600">
         Error al cargar datos: {errorPasantes?.message ?? errorRegistros?.message}
-      </p>
+      </div>
     );
   }
 

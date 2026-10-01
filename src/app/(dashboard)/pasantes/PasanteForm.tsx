@@ -34,49 +34,49 @@ export default function PasanteForm({
   return (
     <form action={handleSubmit} className="grid grid-cols-2 gap-3">
       <div>
-        <label className="mb-1 block text-xs font-medium text-gray-600">
+        <label className="mb-1 block text-sm font-medium text-gray-700">
           Nombre
         </label>
         <input
           name="nombre"
           defaultValue={pasante?.nombre}
           required
-          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
       <div>
-        <label className="mb-1 block text-xs font-medium text-gray-600">
+        <label className="mb-1 block text-sm font-medium text-gray-700">
           Apellido
         </label>
         <input
           name="apellido"
           defaultValue={pasante?.apellido}
           required
-          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
       <div>
-        <label className="mb-1 block text-xs font-medium text-gray-600">
+        <label className="mb-1 block text-sm font-medium text-gray-700">
           Legajo (opcional)
         </label>
         <input
           name="legajo"
           defaultValue={pasante?.legajo ?? ""}
-          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
       <div>
-        <label className="mb-1 block text-xs font-medium text-gray-600">
+        <label className="mb-1 block text-sm font-medium text-gray-700">
           Área (opcional)
         </label>
         <input
           name="area"
           defaultValue={pasante?.area ?? ""}
-          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
       <div>
-        <label className="mb-1 block text-xs font-medium text-gray-600">
+        <label className="mb-1 block text-sm font-medium text-gray-700">
           Fecha de inicio
         </label>
         <input
@@ -84,18 +84,18 @@ export default function PasanteForm({
           name="fecha_inicio"
           defaultValue={pasante?.fecha_inicio}
           required
-          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
       <div>
-        <label className="mb-1 block text-xs font-medium text-gray-600">
+        <label className="mb-1 block text-sm font-medium text-gray-700">
           Fecha de fin (opcional)
         </label>
         <input
           type="date"
           name="fecha_fin"
           defaultValue={pasante?.fecha_fin ?? ""}
-          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
 
@@ -106,7 +106,7 @@ export default function PasanteForm({
           <button
             type="button"
             onClick={onDone}
-            className="rounded-md px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-100"
+            className="rounded-md border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
           >
             Cancelar
           </button>

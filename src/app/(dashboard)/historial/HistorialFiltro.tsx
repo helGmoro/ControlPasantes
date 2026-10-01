@@ -36,7 +36,7 @@ export default function HistorialFiltro({
         <select
           value={form.pasanteId}
           onChange={(e) => setForm({ ...form, pasanteId: e.target.value })}
-          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         >
           <option value="">Seleccionar...</option>
           {pasantes.map((p) => (
@@ -54,7 +54,7 @@ export default function HistorialFiltro({
           type="date"
           value={form.desde}
           onChange={(e) => setForm({ ...form, desde: e.target.value })}
-          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
       <div>
@@ -65,7 +65,7 @@ export default function HistorialFiltro({
           type="date"
           value={form.hasta}
           onChange={(e) => setForm({ ...form, hasta: e.target.value })}
-          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
       <button

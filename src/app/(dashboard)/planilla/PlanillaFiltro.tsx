@@ -44,7 +44,7 @@ export default function PlanillaFiltro({
         <select
           value={form.pasanteId}
           onChange={(e) => setForm({ ...form, pasanteId: e.target.value })}
-          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         >
           <option value="">Seleccionar...</option>
           {pasantes.map((p) => (
@@ -61,7 +61,7 @@ export default function PlanillaFiltro({
         <select
           value={form.mes}
           onChange={(e) => setForm({ ...form, mes: Number(e.target.value) })}
-          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         >
           {MESES.map((m, i) => (
             <option key={m} value={i + 1}>
@@ -77,7 +77,7 @@ export default function PlanillaFiltro({
         <select
           value={form.anio}
           onChange={(e) => setForm({ ...form, anio: Number(e.target.value) })}
-          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         >
           {anios.map((a) => (
             <option key={a} value={a}>

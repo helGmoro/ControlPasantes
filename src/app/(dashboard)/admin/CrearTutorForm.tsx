@@ -25,43 +25,43 @@ export default function CrearTutorForm() {
   return (
     <form action={handleSubmit} className="grid grid-cols-2 gap-3">
       <div>
-        <label className="mb-1 block text-xs font-medium text-gray-600">
+        <label className="mb-1 block text-sm font-medium text-gray-700">
           Usuario
         </label>
         <input
           name="username"
           required
-          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
       <div>
-        <label className="mb-1 block text-xs font-medium text-gray-600">
+        <label className="mb-1 block text-sm font-medium text-gray-700">
           Contraseña
         </label>
         <input
           type="password"
           name="password"
           required
-          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
       <div>
-        <label className="mb-1 block text-xs font-medium text-gray-600">
+        <label className="mb-1 block text-sm font-medium text-gray-700">
           Nombre (opcional)
         </label>
         <input
           name="nombre"
-          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
       <div>
-        <label className="mb-1 block text-xs font-medium text-gray-600">
+        <label className="mb-1 block text-sm font-medium text-gray-700">
           Rol
         </label>
         <select
           name="rol"
           defaultValue="tutor"
-          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         >
           <option value="tutor">Tutor</option>
           <option value="admin">Admin</option>

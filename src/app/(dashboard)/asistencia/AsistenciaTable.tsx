@@ -85,7 +85,7 @@ export default function AsistenciaTable({
           type="date"
           value={fecha}
           onChange={(e) => cambiarFecha(e.target.value)}
-          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
 
@@ -124,7 +124,7 @@ export default function AsistenciaTable({
                           estado: e.target.value as EstadoAsistencia,
                         })
                       }
-                      className="rounded-md border border-gray-300 px-2 py-1 text-sm"
+                      className="rounded-md border border-gray-300 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     >
                       {ESTADOS.map((e) => (
                         <option key={e.value} value={e.value}>
@@ -141,7 +141,7 @@ export default function AsistenciaTable({
                       onChange={(e) =>
                         actualizarFila(i, { horaEntrada: e.target.value })
                       }
-                      className="rounded-md border border-gray-300 px-2 py-1 text-sm disabled:bg-gray-100"
+                      className="rounded-md border border-gray-300 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:bg-gray-100 disabled:text-gray-400"
                     />
                   </td>
                   <td className="px-4 py-2">
@@ -152,7 +152,7 @@ export default function AsistenciaTable({
                       onChange={(e) =>
                         actualizarFila(i, { horaSalida: e.target.value })
                       }
-                      className="rounded-md border border-gray-300 px-2 py-1 text-sm disabled:bg-gray-100"
+                      className="rounded-md border border-gray-300 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:bg-gray-100 disabled:text-gray-400"
                     />
                   </td>
                   <td className="px-4 py-2 text-gray-600">{horas} hs</td>
@@ -164,14 +164,18 @@ export default function AsistenciaTable({
                         actualizarFila(i, { observaciones: e.target.value })
                       }
                       placeholder="Opcional"
-                      className="w-40 rounded-md border border-gray-300 px-2 py-1 text-sm"
+                      className="w-40 rounded-md border border-gray-300 px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     />
                   </td>
                   <td className="px-4 py-2 text-right">
                     <button
                       onClick={() => guardarFila(i)}
                       disabled={fila.guardando}
-                      className="rounded-md bg-blue-600 px-3 py-1 text-xs font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+                      className={`rounded-md px-3 py-1 text-xs font-medium text-white disabled:opacity-50 ${
+                        fila.guardado
+                          ? "bg-green-600 hover:bg-green-700"
+                          : "bg-blue-600 hover:bg-blue-700"
+                      }`}
                     >
                       {fila.guardando
                         ? "Guardando..."
@@ -185,7 +189,7 @@ export default function AsistenciaTable({
             })}
             {filas.length === 0 && (
               <tr>
-                <td colSpan={7} className="px-4 py-6 text-center text-gray-400">
+                <td colSpan={7} className="px-4 py-6 text-center text-gray-500">
                   No hay pasantes activos cargados.
                 </td>
               </tr>

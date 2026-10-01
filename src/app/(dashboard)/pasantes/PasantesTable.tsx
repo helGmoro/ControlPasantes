@@ -52,7 +52,7 @@ export default function PasantesTable({
                   <td className="px-4 py-2">
                     {p.apellido}, {p.nombre}
                     {p.legajo && (
-                      <span className="ml-1 text-gray-400">({p.legajo})</span>
+                      <span className="ml-1 text-gray-500">({p.legajo})</span>
                     )}
                   </td>
                   <td className="px-4 py-2">{p.area ?? "-"}</td>
@@ -80,7 +80,11 @@ export default function PasantesTable({
                     </button>
                     <button
                       onClick={() => cambiarActivo(p.id, !p.activo)}
-                      className="text-gray-500 hover:text-gray-900"
+                      className={
+                        p.activo
+                          ? "text-red-600 hover:text-red-700"
+                          : "text-blue-600 hover:text-blue-700"
+                      }
                     >
                       {p.activo ? "Desactivar" : "Activar"}
                     </button>
@@ -100,7 +104,7 @@ export default function PasantesTable({
             ))}
             {pasantes.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-4 py-6 text-center text-gray-400">
+                <td colSpan={6} className="px-4 py-6 text-center text-gray-500">
                   Todavía no cargaste ningún pasante.
                 </td>
               </tr>
