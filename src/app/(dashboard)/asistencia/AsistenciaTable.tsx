@@ -171,7 +171,7 @@ export default function AsistenciaTable({
                     <button
                       onClick={() => guardarFila(i)}
                       disabled={fila.guardando}
-                      className="rounded-md bg-gray-900 px-3 py-1 text-xs font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+                      className="rounded-md bg-blue-600 px-3 py-1 text-xs font-medium text-white hover:bg-blue-700 disabled:opacity-50"
                     >
                       {fila.guardando
                         ? "Guardando..."

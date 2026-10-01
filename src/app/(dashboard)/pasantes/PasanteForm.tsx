@@ -114,7 +114,7 @@ export default function PasanteForm({
         <button
           type="submit"
           disabled={guardando}
-          className="rounded-md bg-gray-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+          className="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
         >
           {guardando ? "Guardando..." : "Guardar"}
         </button>

@@ -35,14 +35,24 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 via-white to-slate-100 px-4">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm space-y-4 rounded-lg border border-gray-200 bg-white p-6 shadow-sm"
+        className="w-full max-w-sm space-y-5 rounded-xl border border-gray-200 bg-white p-8 shadow-lg shadow-blue-900/5"
       >
-        <h1 className="text-xl font-semibold text-gray-900">
-          Control de asistencia
-        </h1>
+        <div className="flex flex-col items-center gap-3 text-center">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-lg font-semibold text-white">
+            P
+          </div>
+          <div>
+            <h1 className="text-xl font-semibold text-gray-900">
+              Control de asistencia
+            </h1>
+            <p className="mt-1 text-sm text-gray-500">
+              Ingresá con tu usuario de pasante o tutor
+            </p>
+          </div>
+        </div>
 
         <div>
           <label className="mb-1 block text-sm font-medium text-gray-700">
@@ -54,7 +64,7 @@ export default function LoginPage() {
             onChange={(e) => setUsername(e.target.value)}
             required
             autoFocus
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-gray-500 focus:outline-none"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -67,7 +77,7 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-gray-500 focus:outline-none"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -76,7 +86,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={cargando}
-          className="w-full rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+          className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
         >
           {cargando ? "Ingresando..." : "Ingresar"}
         </button>
