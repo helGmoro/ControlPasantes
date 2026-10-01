@@ -33,6 +33,7 @@ export default async function AsistenciaPage({
 
   return (
     <AsistenciaTable
+      key={fecha}
       fecha={fecha}
       pasantes={(pasantes ?? []) as Pasante[]}
       registros={(registros ?? []) as Asistencia[]}
