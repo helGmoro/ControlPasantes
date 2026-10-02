@@ -13,13 +13,28 @@ export default function PasantesTable({
 }) {
   const [mostrarNuevo, setMostrarNuevo] = useState(false);
   const [editandoId, setEditandoId] = useState<string | null>(null);
+  const [cambiandoId, setCambiandoId] = useState<string | null>(null);
 
-  async function handleCambiarActivo(id: string, activo: boolean) {
+  async function handleCambiarActivo(
+    id: string,
+    activo: boolean,
+    nombreCompleto: string
+  ) {
+    if (!activo) {
+      const confirmar = window.confirm(
+        `¿Seguro que querés desactivar a ${nombreCompleto}? Dejará de aparecer en la carga de asistencia diaria.`
+      );
+      if (!confirmar) return;
+    }
+
+    setCambiandoId(id);
     try {
       await cambiarActivo(id, activo);
       toast.success(activo ? "Pasante activado" : "Pasante desactivado");
     } catch {
       toast.error("No se pudo actualizar el pasante. Intentá nuevamente.");
+    } finally {
+      setCambiandoId(null);
     }
   }
 
@@ -65,18 +80,20 @@ export default function PasantesTable({
                   <td className="px-4 py-2 font-medium text-gray-900">
                     {p.apellido}, {p.nombre}
                     {p.legajo && (
-                      <span className="ml-1 text-gray-500">({p.legajo})</span>
+                      <span className="ml-1 text-gray-600">({p.legajo})</span>
                     )}
                   </td>
-                  <td className="px-4 py-2">{p.area ?? "-"}</td>
-                  <td className="px-4 py-2">{p.fecha_inicio}</td>
-                  <td className="px-4 py-2">{p.fecha_fin ?? "-"}</td>
+                  <td className="px-4 py-2 text-gray-800">{p.area ?? "-"}</td>
+                  <td className="px-4 py-2 text-gray-800">{p.fecha_inicio}</td>
+                  <td className="px-4 py-2 text-gray-800">
+                    {p.fecha_fin ?? "-"}
+                  </td>
                   <td className="px-4 py-2">
                     <span
-                      className={`rounded-full px-2 py-0.5 text-xs ${
+                      className={`rounded-full px-2 py-0.5 text-xs font-medium ${
                         p.activo
                           ? "bg-green-100 text-green-700"
-                          : "bg-gray-100 text-gray-500"
+                          : "bg-gray-200 text-gray-700"
                       }`}
                     >
                       {p.activo ? "Activo" : "Inactivo"}
@@ -87,19 +104,31 @@ export default function PasantesTable({
                       onClick={() =>
                         setEditandoId(editandoId === p.id ? null : p.id)
                       }
-                      className="text-gray-500 transition-colors hover:text-gray-900"
+                      disabled={cambiandoId === p.id}
+                      className="text-gray-600 transition-colors hover:text-gray-900 disabled:opacity-50"
                     >
                       Editar
                     </button>
                     <button
-                      onClick={() => handleCambiarActivo(p.id, !p.activo)}
-                      className={
+                      onClick={() =>
+                        handleCambiarActivo(
+                          p.id,
+                          !p.activo,
+                          `${p.nombre} ${p.apellido}`
+                        )
+                      }
+                      disabled={cambiandoId === p.id}
+                      className={`disabled:opacity-50 ${
                         p.activo
                           ? "text-red-600 transition-colors hover:text-red-700"
                           : "text-blue-600 transition-colors hover:text-blue-700"
-                      }
+                      }`}
                     >
-                      {p.activo ? "Desactivar" : "Activar"}
+                      {cambiandoId === p.id
+                        ? "..."
+                        : p.activo
+                        ? "Desactivar"
+                        : "Activar"}
                     </button>
                   </td>
                 </tr>

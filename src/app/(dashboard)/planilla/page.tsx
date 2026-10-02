@@ -80,53 +80,61 @@ export default async function PlanillaPage({
             </p>
           </div>
 
-          <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-gray-300 text-left text-xs uppercase text-gray-500">
-                <th className="py-1.5">Fecha</th>
-                <th className="py-1.5">Estado</th>
-                <th className="py-1.5">Entrada</th>
-                <th className="py-1.5">Salida</th>
-                <th className="py-1.5">Horas</th>
-                <th className="py-1.5">Observaciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {dias.map((d) => (
-                <tr key={d.id} className="border-b border-gray-100">
-                  <td className="py-1">{d.fecha}</td>
-                  <td className="py-1">{etiquetaEstado(d.estado)}</td>
-                  <td className="py-1">{d.hora_entrada ?? "-"}</td>
-                  <td className="py-1">{d.hora_salida ?? "-"}</td>
-                  <td className="py-1">
-                    {calcularHoras(d.estado, d.hora_entrada, d.hora_salida)}
-                  </td>
-                  <td className="py-1">{d.observaciones ?? ""}</td>
-                </tr>
-              ))}
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colSpan={4} className="pt-3 text-right text-sm font-medium">
-                  Total de horas:
-                </td>
-                <td colSpan={2} className="pt-3 text-sm font-semibold">
-                  {totalHoras} hs
-                </td>
-              </tr>
-            </tfoot>
-          </table>
-          </div>
+          {dias.length === 0 ? (
+            <div className="no-print rounded-md border border-dashed border-gray-300 bg-gray-50 p-6 text-center text-sm text-gray-600">
+              Todavía no hay días cargados para este período.
+            </div>
+          ) : (
+            <>
+              <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-300 text-left text-xs uppercase text-gray-500">
+                    <th className="py-1.5">Fecha</th>
+                    <th className="py-1.5">Estado</th>
+                    <th className="py-1.5">Entrada</th>
+                    <th className="py-1.5">Salida</th>
+                    <th className="py-1.5">Horas</th>
+                    <th className="py-1.5">Observaciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {dias.map((d) => (
+                    <tr key={d.id} className="border-b border-gray-100">
+                      <td className="py-1">{d.fecha}</td>
+                      <td className="py-1">{etiquetaEstado(d.estado)}</td>
+                      <td className="py-1">{d.hora_entrada ?? "-"}</td>
+                      <td className="py-1">{d.hora_salida ?? "-"}</td>
+                      <td className="py-1">
+                        {calcularHoras(d.estado, d.hora_entrada, d.hora_salida)}
+                      </td>
+                      <td className="py-1">{d.observaciones ?? ""}</td>
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colSpan={4} className="pt-3 text-right text-sm font-medium">
+                      Total de horas:
+                    </td>
+                    <td colSpan={2} className="pt-3 text-sm font-semibold">
+                      {totalHoras} hs
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+              </div>
 
-          <div className="mt-10 flex flex-col gap-6 text-sm text-gray-600 sm:flex-row sm:justify-between">
-            <div className="border-t border-gray-400 pt-1 sm:pr-16">
-              Firma del tutor
-            </div>
-            <div className="border-t border-gray-400 pt-1 sm:pl-16">
-              Firma del pasante
-            </div>
-          </div>
+              <div className="mt-10 flex flex-col gap-6 text-sm text-gray-600 sm:flex-row sm:justify-between">
+                <div className="border-t border-gray-400 pt-1 sm:pr-16">
+                  Firma del tutor
+                </div>
+                <div className="border-t border-gray-400 pt-1 sm:pl-16">
+                  Firma del pasante
+                </div>
+              </div>
+            </>
+          )}
         </div>
       )}
     </div>

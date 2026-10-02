@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import type { Pasante } from "@/lib/types";
 
 export default function HistorialFiltro({
@@ -16,6 +16,7 @@ export default function HistorialFiltro({
   hasta: string;
 }) {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const [form, setForm] = useState({ pasanteId, desde, hasta });
 
   function aplicar() {
@@ -24,7 +25,9 @@ export default function HistorialFiltro({
       desde: form.desde,
       hasta: form.hasta,
     });
-    router.push(`/historial?${params.toString()}`);
+    startTransition(() => {
+      router.push(`/historial?${params.toString()}`);
+    });
   }
 
   return (
@@ -36,7 +39,8 @@ export default function HistorialFiltro({
         <select
           value={form.pasanteId}
           onChange={(e) => setForm({ ...form, pasanteId: e.target.value })}
-          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:w-auto"
+          disabled={isPending}
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 sm:w-auto"
         >
           <option value="">Seleccionar...</option>
           {pasantes.map((p) => (
@@ -54,7 +58,8 @@ export default function HistorialFiltro({
           type="date"
           value={form.desde}
           onChange={(e) => setForm({ ...form, desde: e.target.value })}
-          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:w-auto"
+          disabled={isPending}
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 sm:w-auto"
         />
       </div>
       <div className="w-full sm:w-auto">
@@ -65,14 +70,16 @@ export default function HistorialFiltro({
           type="date"
           value={form.hasta}
           onChange={(e) => setForm({ ...form, hasta: e.target.value })}
-          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:w-auto"
+          disabled={isPending}
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 sm:w-auto"
         />
       </div>
       <button
         onClick={aplicar}
-        className="w-full rounded-md bg-gradient-to-br from-blue-500 to-blue-700 px-4 py-1.5 text-sm font-medium text-white shadow-sm transition-transform hover:brightness-110 active:scale-[0.98] sm:w-auto"
+        disabled={isPending}
+        className="w-full rounded-md bg-gradient-to-br from-blue-500 to-blue-700 px-4 py-1.5 text-sm font-medium text-white shadow-sm transition-transform hover:brightness-110 active:scale-[0.98] disabled:opacity-50 sm:w-auto"
       >
-        Filtrar
+        {isPending ? "Cargando..." : "Filtrar"}
       </button>
     </div>
   );

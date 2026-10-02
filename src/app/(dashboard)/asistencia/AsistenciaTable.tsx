@@ -336,7 +336,9 @@ export default function AsistenciaTable({
                           className="rounded-md border border-gray-300 px-2 py-1 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:bg-gray-100 disabled:text-gray-400"
                         />
                       </td>
-                      <td className="px-4 py-2 text-gray-600">{horas} hs</td>
+                      <td className="px-4 py-2 font-medium text-gray-900">
+                        {horas} hs
+                      </td>
                       <td className="px-4 py-2">
                         <input
                           type="text"

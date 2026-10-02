@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import type { Pasante } from "@/lib/types";
 
 const MESES = [
@@ -21,6 +21,7 @@ export default function PlanillaFiltro({
   mes: number; // 1-12
 }) {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const [form, setForm] = useState({ pasanteId, anio, mes });
 
   function aplicar() {
@@ -29,7 +30,9 @@ export default function PlanillaFiltro({
       anio: String(form.anio),
       mes: String(form.mes),
     });
-    router.push(`/planilla?${params.toString()}`);
+    startTransition(() => {
+      router.push(`/planilla?${params.toString()}`);
+    });
   }
 
   const anioActual = new Date().getFullYear();
@@ -44,7 +47,8 @@ export default function PlanillaFiltro({
         <select
           value={form.pasanteId}
           onChange={(e) => setForm({ ...form, pasanteId: e.target.value })}
-          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:w-auto"
+          disabled={isPending}
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 sm:w-auto"
         >
           <option value="">Seleccionar...</option>
           {pasantes.map((p) => (
@@ -61,7 +65,8 @@ export default function PlanillaFiltro({
         <select
           value={form.mes}
           onChange={(e) => setForm({ ...form, mes: Number(e.target.value) })}
-          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:w-auto"
+          disabled={isPending}
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 sm:w-auto"
         >
           {MESES.map((m, i) => (
             <option key={m} value={i + 1}>
@@ -77,7 +82,8 @@ export default function PlanillaFiltro({
         <select
           value={form.anio}
           onChange={(e) => setForm({ ...form, anio: Number(e.target.value) })}
-          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:w-auto"
+          disabled={isPending}
+          className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 sm:w-auto"
         >
           {anios.map((a) => (
             <option key={a} value={a}>
@@ -88,9 +94,10 @@ export default function PlanillaFiltro({
       </div>
       <button
         onClick={aplicar}
-        className="w-full rounded-md bg-gradient-to-br from-blue-500 to-blue-700 px-4 py-1.5 text-sm font-medium text-white shadow-sm transition-transform hover:brightness-110 active:scale-[0.98] sm:w-auto"
+        disabled={isPending}
+        className="w-full rounded-md bg-gradient-to-br from-blue-500 to-blue-700 px-4 py-1.5 text-sm font-medium text-white shadow-sm transition-transform hover:brightness-110 active:scale-[0.98] disabled:opacity-50 sm:w-auto"
       >
-        Generar
+        {isPending ? "Cargando..." : "Generar"}
       </button>
       {pasanteId && (
         <button

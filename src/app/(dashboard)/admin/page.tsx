@@ -58,13 +58,13 @@ export default async function AdminPage() {
                 className="border-t border-gray-100 transition-colors hover:bg-blue-50/40"
               >
                 <td className="px-4 py-2 font-medium text-gray-900">{t.username}</td>
-                <td className="px-4 py-2">{t.nombre ?? "-"}</td>
+                <td className="px-4 py-2 text-gray-800">{t.nombre ?? "-"}</td>
                 <td className="px-4 py-2">
                   <span
-                    className={`rounded-full px-2 py-0.5 text-xs ${
+                    className={`rounded-full px-2 py-0.5 text-xs font-medium ${
                       t.rol === "admin"
                         ? "bg-blue-100 text-blue-700"
-                        : "bg-gray-100 text-gray-600"
+                        : "bg-gray-200 text-gray-700"
                     }`}
                   >
                     {t.rol}
